@@ -1,0 +1,371 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Welcome to MATCHER’s documentation! &mdash; MATCHER 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="MATCHER 0.1 documentation" href="#"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> MATCHER
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="simple">
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">MATCHER</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="#">Docs</a> &raquo;</li>
+      
+    <li>Welcome to MATCHER&#8217;s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/index.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="welcome-to-matcher-s-documentation">
+<h1>Welcome to MATCHER&#8217;s documentation!<a class="headerlink" href="#welcome-to-matcher-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<dl class="class">
+<dt id="matcher.MATCHER">
+<em class="property">class </em><code class="descclassname">matcher.</code><code class="descname">MATCHER</code><span class="sig-paren">(</span><em>X</em>, <em>missing_data=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER" title="Permalink to this definition">¶</a></dt>
+<dd><p>Manifold Alignment to Characterize Experimental Relationships (MATCHER)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>X</strong> (<em>list, possibly nested</em>) &#8211; One or more single cell datasets. To learn a joint trajectory from two datasets with known correspondences, add a second level list.</li>
+<li><strong>missing_data</strong> (<em>bool</em>) &#8211; Model missing data?</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="matcher.MATCHER.correlation">
+<code class="descname">correlation</code><span class="sig-paren">(</span><em>model1</em>, <em>model2</em>, <em>inds1</em>, <em>inds2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER.correlation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER.correlation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Approximate correlation between the specified features of two different data types.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model1</strong> (<em>int</em>) &#8211; Index of first data type</li>
+<li><strong>model2</strong> (<em>int</em>) &#8211; Index of second data type</li>
+<li><strong>inds1</strong> (<em>list</em>) &#8211; Indices of features</li>
+<li><strong>inds2</strong> (<em>list</em>) &#8211; Indices of features</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Spearman correlation matrix and p-values</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rytpe:</th><td class="field-body"><p class="first last">list of arrays</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="matcher.MATCHER.find_markers">
+<code class="descname">find_markers</code><span class="sig-paren">(</span><em>inds</em>, <em>fdr_correction=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER.find_markers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER.find_markers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find features that are significantly related to pseudotime from each specified data type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>inds</strong> (<em>list</em>) &#8211; Indices of data types to use</li>
+<li><strong>fdr_correction</strong> (<em>bool</em>) &#8211; Perform multiple hypothesis test correction to control FDR?</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of indices for each data type</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of lists</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="matcher.MATCHER.infer">
+<code class="descname">infer</code><span class="sig-paren">(</span><em>quantiles=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER.infer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER.infer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Infer pseudotime values using variational Bayes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>quantiles</strong> (<em>int</em>) &#8211; How many quantiles to use when computing warp functions</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="matcher.MATCHER.plot_feature">
+<code class="descname">plot_feature</code><span class="sig-paren">(</span><em>model_ind</em>, <em>feature_ind</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER.plot_feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER.plot_feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the specified feature and its model fit</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model_ind</strong> (<em>int</em>) &#8211; Index for data type</li>
+<li><strong>feature_ind</strong> (<em>int</em>) &#8211; Index of feature</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="matcher.MATCHER.plot_pseudotime">
+<code class="descname">plot_pseudotime</code><span class="sig-paren">(</span><em>inds</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER.plot_pseudotime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER.plot_pseudotime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot inferred pseudotime values and posterior uncertainty for models specified by inds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inds</strong> (<em>list</em>) &#8211; Indices of data types</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="matcher.MATCHER.plot_warping_functions">
+<code class="descname">plot_warping_functions</code><span class="sig-paren">(</span><em>inds</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER.plot_warping_functions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER.plot_warping_functions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the functions for each data type that map from &#8220;domain-specific pseudotime&#8221; to &#8220;master pseudotime&#8221;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inds</strong> (<em>list</em>) &#8211; Indices of data types</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="matcher.MATCHER.reverse_pseudotime">
+<code class="descname">reverse_pseudotime</code><span class="sig-paren">(</span><em>inds</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER.reverse_pseudotime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER.reverse_pseudotime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reverse the direction of pseudotime for the specified model(s).
+This handles the case when the trajectories from different data types move in opposite directions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inds</strong> (<em>list</em>) &#8211; Indices of the model(s) to reverse</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="matcher.MATCHER.sample_pseudotime">
+<code class="descname">sample_pseudotime</code><span class="sig-paren">(</span><em>ind</em>, <em>samples=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER.sample_pseudotime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER.sample_pseudotime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample from the posterior for the inferred pseudotime values for the specified model.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ind</strong> (<em>int</em>) &#8211; Index of model to sample</li>
+<li><strong>samples</strong> (<em>int</em>) &#8211; Number of samples</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Posterior samples from inferred pseudotime values for each cell</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">SxN array, where S is the number of samples and N is the number of cells</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Joshua D. Welch.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
