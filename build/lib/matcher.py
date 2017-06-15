@@ -99,10 +99,10 @@ class MATCHER:
             else:
                  self.model.append(gpy.models.bayesian_gplvm.BayesianGPLVM(self.X[i], input_dim=1, kernel=gpy.kern.RBF(1)))
         self.warp_functions = []
-        self.master_time = []
+        self.pseudotime = []
 
     def infer(self,quantiles=50,method=None,reverse=None):
-        """ Infer pseudotime and master time values.
+        """ Infer pseudotime values using variational Bayes.
             
             :param quantiles: How many quantiles to use when computing warp functions
             :type quantiles: int
@@ -114,7 +114,7 @@ class MATCHER:
         """
         num_datasets = len(self.X)
         self.warp_functions = [None] * num_datasets
-        self.master_time = [None] * num_datasets
+        self.pseudotime = [None] * num_datasets
         if method is None:
             method = ['gp']
             method = np.repeat(method,[num_datasets])
@@ -128,16 +128,16 @@ class MATCHER:
     def learn_warp_function(self,ind,quantiles=50,method='gp',reverse=False):
         t = self.model[ind].latent_space.mean
         self.warp_functions[ind] = WarpFunction(t,quantiles,method,reverse)
-        self.master_time[ind] = self.warp_functions[ind].warp(t)
+        self.pseudotime[ind] = self.warp_functions[ind].warp(t)
         
-    def sample_master_time(self, ind, samples=10):
-        """ Sample from the posterior for the inferred master time values for the specified model.
+    def sample_pseudotime(self, ind, samples=10):
+        """ Sample from the posterior for the inferred pseudotime values for the specified model.
         
             :param ind: Index of model to sample
             :type ind: int
             :param samples: Number of samples
             :type samples: int
-            :returns: Posterior samples from inferred master_time values for each cell
+            :returns: Posterior samples from inferred pseudotime values for each cell
             :rtype: SxN array, where S is the number of samples and N is the number of cells
         
         """
@@ -200,51 +200,7 @@ class MATCHER:
             else:
                 p_vals.append(raw_p_vals)
         return p_vals
-
-    def infer_corresponding_features(self,model1,model2,inds1,inds2):
-        """ Infer corresponding values of features from different data types
-        
-            :param model1: Index of first data type
-            :type model1: int
-            :param model2: Index of second data type
-            :type model2: int
-            :param inds1: Indices of features
-            :type inds1: list
-            :param inds2: Indices of features
-            :type inds2: list
-            :returns: Feature values in corresponding cells
-            :rytpe: list of 2D arrays
-            
-        """
-        t = self.master_time[model1]
-        model2_internal = self.warp_functions[model2].inverse_warp(t.reshape(-1,1))
-        vals1 = self.X[model1][:,inds1]
-        vals2 = self.model[model2].predict(model2_internal)[0][:,inds2]
-        return [vals1,vals2]
-
-    def plot_corresponding_features(self,model1,model2,ind1,ind2):
-        """ Infer corresponding values of features from different data types
-        and displays a scatter plot of these values. Points are colored by
-        master time.
-        
-            :param model1: Index of first data type
-            :type model1: int
-            :param model2: Index of second data type
-            :type model2: int
-            :param ind1: Index of feature
-            :type ind1: int
-            :param ind2: Index of feature
-            :type ind2: int
-            
-        """
-        t = self.master_time[model1]
-        model2_internal = self.warp_functions[model2].inverse_warp(t.reshape(-1,1))
-        vals1 = self.X[model1][:,ind1]
-        vals2 = self.model[model2].predict(model2_internal)[0][:,ind2]
-        plt.scatter(vals1,vals2,c=t,cmap='hot')
-        cb = plt.colorbar()
-        cb.set_label('Master Time')    
-
+    
     def correlation(self,model1,model2,inds1,inds2,method="Spearman"):
         """ Approximate correlation between the specified features of two different data types.
         
@@ -262,7 +218,7 @@ class MATCHER:
             :rytpe: 2D array
             
         """
-        t = self.master_time[model1]
+        t = self.pseudotime[model1]
         model2_internal = self.warp_functions[model2].inverse_warp(t.reshape(-1,1))
         vals1 = self.X[model1][:,inds1]
         vals2 = self.model[model2].predict(model2_internal)[0][:,inds2]
@@ -281,7 +237,7 @@ class MATCHER:
         return corr_mat
         
     def plot_warp_functions(self,inds):
-        """ Plot the functions for each data type that map from domain-specific pseudotime to master time.
+        """ Plot the functions for each data type that map from "domain-specific pseudotime" to "master pseudotime".
         
             :param inds: Indices of data types
             :type inds: list
@@ -307,8 +263,8 @@ class MATCHER:
         fig = self.model[model_ind].plot_f(which_data_ycols=[feature_ind],plot_inducing=False)
         fig.scatter(self.model[model_ind].latent_space.mean,self.X[model_ind][:,feature_ind],marker='x',c="black")
         
-    def plot_master_time(self,inds):
-        """ Plot inferred master time values and uncertainty for models specified by inds.
+    def plot_pseudotime(self,inds):
+        """ Plot inferred pseudotime values and posterior uncertainty for models specified by inds.
         
             :param inds: Indices of data types
             :type inds: list

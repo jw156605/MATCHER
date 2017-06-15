@@ -12,7 +12,8 @@ Contents:
    :maxdepth: 2
 .. autoclass:: matcher.MATCHER
    :members:
-
+.. autoclass:: matcher.WarpFunction
+   :members:
 
 Indices and tables
 ==================

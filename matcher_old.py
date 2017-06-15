@@ -200,51 +200,7 @@ class MATCHER:
             else:
                 p_vals.append(raw_p_vals)
         return p_vals
-
-    def infer_corresponding_features(self,model1,model2,inds1,inds2):
-        """ Infer corresponding values of features from different data types
-        
-            :param model1: Index of first data type
-            :type model1: int
-            :param model2: Index of second data type
-            :type model2: int
-            :param inds1: Indices of features
-            :type inds1: list
-            :param inds2: Indices of features
-            :type inds2: list
-            :returns: Feature values in corresponding cells
-            :rytpe: list of 2D arrays
-            
-        """
-        t = self.master_time[model1]
-        model2_internal = self.warp_functions[model2].inverse_warp(t.reshape(-1,1))
-        vals1 = self.X[model1][:,inds1]
-        vals2 = self.model[model2].predict(model2_internal)[0][:,inds2]
-        return [vals1,vals2]
-
-    def plot_corresponding_features(self,model1,model2,ind1,ind2):
-        """ Infer corresponding values of features from different data types
-        and displays a scatter plot of these values. Points are colored by
-        master time.
-        
-            :param model1: Index of first data type
-            :type model1: int
-            :param model2: Index of second data type
-            :type model2: int
-            :param ind1: Index of feature
-            :type ind1: int
-            :param ind2: Index of feature
-            :type ind2: int
-            
-        """
-        t = self.master_time[model1]
-        model2_internal = self.warp_functions[model2].inverse_warp(t.reshape(-1,1))
-        vals1 = self.X[model1][:,ind1]
-        vals2 = self.model[model2].predict(model2_internal)[0][:,ind2]
-        plt.scatter(vals1,vals2,c=t,cmap='hot')
-        cb = plt.colorbar()
-        cb.set_label('Master Time')    
-
+    
     def correlation(self,model1,model2,inds1,inds2,method="Spearman"):
         """ Approximate correlation between the specified features of two different data types.
         

@@ -1,0 +1,31 @@
+Metadata-Version: 1.1
+Name: matcher
+Version: 1.0.0
+Summary: Manifold Alignment to Characterize Experimental Relationships
+Home-page: https://github.com/jw156605/matcher
+Author: Joshua D. Welch
+Author-email: jwelch@cs.unc.edu
+License: MIT
+Description: MATCHER
+        =======================
+        
+        MATCHER is intended to be run with the Anaconda distribution of Python (https://www.continuum.io/downloads). 
+        
+        Installation: pip install <path-to-matcher>
+        
+        Full HTML documentation is available in docs/build/html/index.html
+        
+        MATCHER_demo.ipynb is a Jupyter notebook demonstrating how to run MATCHER on synthetic data provided with the package.
+Keywords: manifold learning single cell genomics
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Computational Biology :: Single Cell Genomics
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5

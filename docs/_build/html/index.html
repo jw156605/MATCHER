@@ -133,7 +133,7 @@
 </div>
 <dl class="class">
 <dt id="matcher.MATCHER">
-<em class="property">class </em><code class="descclassname">matcher.</code><code class="descname">MATCHER</code><span class="sig-paren">(</span><em>X</em>, <em>missing_data=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">matcher.</code><code class="descname">MATCHER</code><span class="sig-paren">(</span><em>X</em>, <em>num_inducing=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER" title="Permalink to this definition">¶</a></dt>
 <dd><p>Manifold Alignment to Characterize Experimental Relationships (MATCHER)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -141,7 +141,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>X</strong> (<em>list, possibly nested</em>) &#8211; One or more single cell datasets. To learn a joint trajectory from two datasets with known correspondences, add a second level list.</li>
-<li><strong>missing_data</strong> (<em>bool</em>) &#8211; Model missing data?</li>
+<li><strong>num_inducing</strong> &#8211; Number of &#8220;inducing inputs&#8221; to use in variational approximation</li>
 </ul>
 </td>
 </tr>
@@ -149,7 +149,7 @@
 </table>
 <dl class="method">
 <dt id="matcher.MATCHER.correlation">
-<code class="descname">correlation</code><span class="sig-paren">(</span><em>model1</em>, <em>model2</em>, <em>inds1</em>, <em>inds2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER.correlation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER.correlation" title="Permalink to this definition">¶</a></dt>
+<code class="descname">correlation</code><span class="sig-paren">(</span><em>model1</em>, <em>model2</em>, <em>inds1</em>, <em>inds2</em>, <em>method='Spearman'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER.correlation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER.correlation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Approximate correlation between the specified features of two different data types.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -160,13 +160,14 @@
 <li><strong>model2</strong> (<em>int</em>) &#8211; Index of second data type</li>
 <li><strong>inds1</strong> (<em>list</em>) &#8211; Indices of features</li>
 <li><strong>inds2</strong> (<em>list</em>) &#8211; Indices of features</li>
+<li><strong>method</strong> (<em>string</em>) &#8211; Type of correlation coefficient to compute (&#8220;Spearman&#8221; or &#8220;Pearson&#8221;)</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Spearman correlation matrix and p-values</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Correlation matrix</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Rytpe:</th><td class="field-body"><p class="first last">list of arrays</p>
+<tr class="field-odd field"><th class="field-name">Rytpe:</th><td class="field-body"><p class="first last">2D array</p>
 </td>
 </tr>
 </tbody>
@@ -199,13 +200,18 @@
 
 <dl class="method">
 <dt id="matcher.MATCHER.infer">
-<code class="descname">infer</code><span class="sig-paren">(</span><em>quantiles=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER.infer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER.infer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Infer pseudotime values using variational Bayes.</p>
+<code class="descname">infer</code><span class="sig-paren">(</span><em>quantiles=50</em>, <em>method=None</em>, <em>reverse=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER.infer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER.infer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Infer pseudotime and master time values.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>quantiles</strong> (<em>int</em>) &#8211; How many quantiles to use when computing warp functions</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>quantiles</strong> (<em>list of booleans</em>) &#8211; How many quantiles to use when computing warp functions</li>
+<li><strong>method</strong> (<em>list of strings</em>) &#8211; Gaussian process regression or linear interpolation?</li>
+<li><strong>reverse</strong> &#8211; Reverse pseudotime?</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -230,9 +236,9 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="matcher.MATCHER.plot_pseudotime">
-<code class="descname">plot_pseudotime</code><span class="sig-paren">(</span><em>inds</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER.plot_pseudotime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER.plot_pseudotime" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot inferred pseudotime values and posterior uncertainty for models specified by inds.</p>
+<dt id="matcher.MATCHER.plot_master_time">
+<code class="descname">plot_master_time</code><span class="sig-paren">(</span><em>inds</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER.plot_master_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER.plot_master_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot inferred master time values and uncertainty for models specified by inds.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -244,9 +250,9 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="matcher.MATCHER.plot_warping_functions">
-<code class="descname">plot_warping_functions</code><span class="sig-paren">(</span><em>inds</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER.plot_warping_functions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER.plot_warping_functions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot the functions for each data type that map from &#8220;domain-specific pseudotime&#8221; to &#8220;master pseudotime&#8221;.</p>
+<dt id="matcher.MATCHER.plot_warp_functions">
+<code class="descname">plot_warp_functions</code><span class="sig-paren">(</span><em>inds</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER.plot_warp_functions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER.plot_warp_functions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the functions for each data type that map from domain-specific pseudotime to master time.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -258,24 +264,9 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="matcher.MATCHER.reverse_pseudotime">
-<code class="descname">reverse_pseudotime</code><span class="sig-paren">(</span><em>inds</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER.reverse_pseudotime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER.reverse_pseudotime" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reverse the direction of pseudotime for the specified model(s).
-This handles the case when the trajectories from different data types move in opposite directions.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inds</strong> (<em>list</em>) &#8211; Indices of the model(s) to reverse</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="matcher.MATCHER.sample_pseudotime">
-<code class="descname">sample_pseudotime</code><span class="sig-paren">(</span><em>ind</em>, <em>samples=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER.sample_pseudotime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER.sample_pseudotime" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sample from the posterior for the inferred pseudotime values for the specified model.</p>
+<dt id="matcher.MATCHER.sample_master_time">
+<code class="descname">sample_master_time</code><span class="sig-paren">(</span><em>ind</em>, <em>samples=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#MATCHER.sample_master_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.MATCHER.sample_master_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample from the posterior for the inferred master time values for the specified model.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -286,11 +277,68 @@ This handles the case when the trajectories from different data types move in op
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Posterior samples from inferred pseudotime values for each cell</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Posterior samples from inferred master_time values for each cell</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">SxN array, where S is the number of samples and N is the number of cells</p>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="matcher.WarpFunction">
+<em class="property">class </em><code class="descclassname">matcher.</code><code class="descname">WarpFunction</code><span class="sig-paren">(</span><em>t</em>, <em>quantiles=50</em>, <em>method='gp'</em>, <em>reverse=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#WarpFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.WarpFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to learn a (possibly nonlinear) function warping from
+observed distribution to uniform (0,1) distribution and back.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>t</strong> (<em>Nx1 array of float</em>) &#8211; pseudotime values</li>
+<li><strong>quantiles</strong> (<em>integer</em>) &#8211; Number of quantiles to use in learning warp</li>
+<li><strong>method</strong> (<em>string</em>) &#8211; Gaussian process regression or linear interpolation?</li>
+<li><strong>reverse</strong> (<em>boolean</em>) &#8211; Reverse uniform quantiles before warping?</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="matcher.WarpFunction.inverse_warp">
+<code class="descname">inverse_warp</code><span class="sig-paren">(</span><em>tm</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#WarpFunction.inverse_warp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.WarpFunction.inverse_warp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Warp from master time to pseudotime .</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tm</strong> (<em>Nx1 array of float</em>) &#8211; master time values</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">inferred pseudotime values</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Nx1 array of float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="matcher.WarpFunction.warp">
+<code class="descname">warp</code><span class="sig-paren">(</span><em>t</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/matcher.html#WarpFunction.warp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#matcher.WarpFunction.warp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Warp from pseudotime to master time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<em>Nx1 array of float</em>) &#8211; pseudotime values</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">inferred master time values</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Nx1 array of float</td>
 </tr>
 </tbody>
 </table>
