@@ -2,6 +2,7 @@ LICENSE.txt
 MANIFEST.in
 README.rst
 matcher.py
+setup.cfg
 setup.py
 data/Cheow_expression.csv
 data/Cheow_methylation.csv
