@@ -3,7 +3,7 @@
 
 MATCHER is on the Python package index (PyPI). To install it using pip, simply type:
 
-        pip install sc_matcher
+        pip install sc-matcher
 
 **MATCHER Input**
 
