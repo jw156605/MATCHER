@@ -3,7 +3,7 @@
 
 MATCHER is on the Python package index (PyPI). To install it using pip, simply type:
 
-        pip install sc-matcher
+        pip install pymatcher
 
 **MATCHER Input**
 
@@ -11,4 +11,4 @@ MATCHER takes in single cell datasets as Numpy ndarrays (produced by the genfrom
 
 **MATCHER Documentation**
 
-Detailed documentation for MATCHER code is available at https://pythonhosted.org/sc-matcher/.
+Detailed documentation for MATCHER code is available at https://pythonhosted.org/pymatcher/.
