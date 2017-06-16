@@ -12,3 +12,5 @@ MATCHER takes in single cell datasets as Numpy ndarrays (produced by the genfrom
 **MATCHER Documentation**
 
 Detailed documentation for MATCHER code is available at https://pythonhosted.org/pymatcher/.
+
+[![DOI](https://zenodo.org/badge/94479837.svg)](https://zenodo.org/badge/latestdoi/94479837)
