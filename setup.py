@@ -18,12 +18,12 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='sc_matcher',
+    name='pymatcher',
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='1.0.0',
+    version='0.0.0',
 
     description='Manifold Alignment to Characterize Experimental Relationships',
     long_description=long_description,
@@ -69,11 +69,11 @@ setup(
 
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
-    #packages=['matcher'],
+    packages=['pymatcher'],
 
     # Alternatively, if you want to distribute just a my_module.py, uncomment
     # this:
-    py_modules=["matcher"],
+    #py_modules=["matcher"],
 
     # List run-time dependencies here.  These will be installed by pip when
     # your project is installed. For an analysis of "install_requires" vs pip's
@@ -89,13 +89,13 @@ setup(
     #    'dev': ['check-manifest'],
     #    'test': ['coverage'],
     #},
-
+    include_package_data = True,
     # If there are data files included in your packages that need to be
     # installed, specify them here.  If using Python 2.6 or less, then these
     # have to be included in MANIFEST.in as well.
-    #package_data={
-    #    'sample': ['package_data.dat'],
-    #},
+    package_data={
+        'data': ['Cheow_expression.csv','Cheow_methylation.csv'],
+    },
 
     # Although 'package_data' is the preferred approach, in some case you may
     # need to place data files outside of your packages. See:

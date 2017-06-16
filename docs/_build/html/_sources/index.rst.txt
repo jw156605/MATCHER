@@ -10,7 +10,7 @@ Welcome to MATCHER's documentation!
 
 MATCHER is on the Python package index (PyPI). To install it using pip, simply type::
 
-        pip install pymatcher
+        pip install scmatcher
 
 **MATCHER Input**
 

@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
-Name: sc-matcher
-Version: 1.0.0
+Name: pymatcher
+Version: 0.0.0
 Summary: Manifold Alignment to Characterize Experimental Relationships
 Home-page: https://github.com/jw156605/matcher
 Author: Joshua D. Welch
