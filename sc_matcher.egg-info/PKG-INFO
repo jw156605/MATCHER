@@ -1,5 +1,5 @@
 Metadata-Version: 1.1
-Name: matcher
+Name: sc-matcher
 Version: 1.0.0
 Summary: Manifold Alignment to Characterize Experimental Relationships
 Home-page: https://github.com/jw156605/matcher
@@ -20,7 +20,7 @@ Keywords: manifold learning single cell genomics
 Platform: UNKNOWN
 Classifier: Development Status :: 3 - Alpha
 Classifier: Intended Audience :: Developers
-Classifier: Topic :: Computational Biology :: Single Cell Genomics
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Programming Language :: Python :: 2
 Classifier: Programming Language :: Python :: 2.6
